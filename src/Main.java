@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
         System.out.println("Let's create your character");
-        System.out.print("Enter name :");
+        System.out.print("Enter name: ");
         String name = cin.nextLine();
         Player player = new Player(name);
         System.out.println("Done!");
@@ -23,6 +23,7 @@ public class Main {
         System.out.println("To eat something and restore your health type -eat");
         System.out.println("To end the day and get some rest type -sleep");
         System.out.println("To know the time type -time");
+        System.out.println("If it is the studying time (8:00-16:00 and 20:00-24:00) -math to study Math");
         System.out.println("To end your miserable life type -surrender");
         Environment timer = new Environment();
         String choice;
@@ -38,7 +39,14 @@ public class Main {
                 timer.endDay(player);
             if (choice.equals("-eat")) {
                 timer.updateTime(1);
+                System.out.print("Yummy ");
                 player.Heal(20);
+            }
+            if (choice.equals("-math"))
+                player.StudyMath(timer);
+            if (player.isDead()) {
+                System.out.println("You Died.");
+                return false;
             }
         }
     }
@@ -51,18 +59,24 @@ class Environment {
         this.time = 7;
         this.day = 120;
     }
+
     void updateTime(int amount) {
         this.time += amount;
         this.day -= this.time/24;
         this.time %= 24;
     }
+
     void whatTime() {
         System.out.println(this.time + ":00 " + this.day + " days left");
     }
+
     void endDay(Player player) {
         int amount = this.time < 7 ? 7 - this.time : 24 - this.time + 7 ;
         this.updateTime(amount);
+        System.out.println("Rise and shine! ");
         player.Rest(amount);
-        System.out.println("Rise and shine!");
+    }
+    int getTime() {
+        return time;
     }
 }

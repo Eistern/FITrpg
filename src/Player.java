@@ -14,17 +14,22 @@ public class Player {
         this.name = name;
     }
 
-    void getInfo() {
+    void getInfo(bestGUI gui) {
+        gui.updateCharacter("Character name: " + this.name + "\n"
+                                + "Current HP: " + this.currentHP + "/" + this.maxHP + "\n"
+                                + "Current Energy: " + this.currentEnergy + "/" + this.maxEnergy + "\n"
+                                + "Math level: " + this.Math);
         System.out.println("Character name: " + this.name);
         System.out.println("Current HP: " + this.currentHP + "/" + this.maxHP);
         System.out.println("Current Energy: " + this.currentEnergy + "/" + this.maxEnergy);
         System.out.println("Math level: " + this.Math);
     }
 
-    void Heal(int amount) {
+    void Heal(int amount, bestGUI gui) {
         this.currentHP += amount;
         if (this.currentHP > this.maxHP)
             this.currentHP = this.maxHP;
+        gui.newAction("(+" + amount + " HP)" + "\n");
         System.out.println("(+" + amount + " HP)");
     }
 

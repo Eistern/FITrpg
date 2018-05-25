@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
         System.out.println("Let's create your character");
@@ -8,12 +9,13 @@ public class Main {
         String name = cin.nextLine();
         Player player = new Player(name);
         System.out.println("Done!");
-        player.getInfo();
-        if (!gameProcess(cin, player))
+        bestGUI gui = new bestGUI();
+        player.getInfo(gui);
+        if (!gameProcess(cin, player, gui))
             System.out.println("You've lost :(");
     }
 
-    private static boolean gameProcess(Scanner cin, Player player) {
+    private static boolean gameProcess(Scanner cin, Player player, bestGUI gui) {
         System.out.println("Now the game begins");
         System.out.println("Since this moment you are a student of NSU, congratulations(?)");
         System.out.println("Studying here could be really fun, but there is no fun, if there is no rules");
@@ -28,19 +30,18 @@ public class Main {
         Environment timer = new Environment();
         String choice;
         while(true) {
+            player.getInfo(gui);
+            timer.whatTime(gui);
+
             choice = cin.nextLine();
             if (choice.equals("-surrender"))
                 return false;
-            if (choice.equals("-info"))
-                player.getInfo();
-            if (choice.equals("-time"))
-                timer.whatTime();
             if (choice.equals("-sleep"))
                 timer.endDay(player);
             if (choice.equals("-eat")) {
                 timer.updateTime(1);
                 System.out.print("Yummy ");
-                player.Heal(20);
+                player.Heal(20, gui);
             }
             if (choice.equals("-math"))
                 player.StudyMath(timer);
@@ -66,8 +67,8 @@ class Environment {
         this.time %= 24;
     }
 
-    void whatTime() {
-        System.out.println(this.time + ":00 " + this.day + " days left");
+    void whatTime(bestGUI gui) {
+        gui.updateTime(this.time + ":00 " + this.day + " days left");
     }
 
     void endDay(Player player) {

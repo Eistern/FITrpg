@@ -16,7 +16,7 @@ public class bestGUI extends JFrame {
 
     bestGUI() {
         super("bestGUI ever 10/10");
-        setSize(640, 480);
+        setSize(720, 540);
         setResizable(false);
         setContentPane(mainPanel);
         setVisible(true);
@@ -48,7 +48,7 @@ public class bestGUI extends JFrame {
     }
 
     void newAction(String s) {
-        Logs.setText(s);
+        Logs.setText(Logs.getText() + "\n" + s);
     }
 
     void updateTime(String s) {

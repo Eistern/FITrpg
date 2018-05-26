@@ -25,7 +25,7 @@ class Player {
         this.currentHP += amount;
         if (this.currentHP > this.maxHP)
             this.currentHP = this.maxHP;
-        Main.gui.newAction("Yummy (+" + amount + " HP)" + "\n");
+        Main.gui.newAction("Yummy (+" + amount + " HP)");
     }
 
     void Rest(int amount) {
@@ -37,7 +37,7 @@ class Player {
 
     void StudyMath(Environment timer) {
         if (!((timer.getTime() > 7 && timer.getTime() < 17) || (timer.getTime() > 19))) {
-            System.out.println("You're not prepared");
+            Main.gui.newAction("You're not prepared");
             return;
         }
         timer.updateTime(2);

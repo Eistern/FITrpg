@@ -1,4 +1,4 @@
-public class Player {
+class Player {
     private String name;
     private int maxHP;
     private int currentHP;
@@ -19,25 +19,20 @@ public class Player {
                                 + "Current HP: " + this.currentHP + "/" + this.maxHP + "\n"
                                 + "Current Energy: " + this.currentEnergy + "/" + this.maxEnergy + "\n"
                                 + "Math level: " + this.Math);
-        System.out.println("Character name: " + this.name);
-        System.out.println("Current HP: " + this.currentHP + "/" + this.maxHP);
-        System.out.println("Current Energy: " + this.currentEnergy + "/" + this.maxEnergy);
-        System.out.println("Math level: " + this.Math);
     }
 
-    void Heal(int amount, bestGUI gui) {
+    void Heal(int amount) {
         this.currentHP += amount;
         if (this.currentHP > this.maxHP)
             this.currentHP = this.maxHP;
-        gui.newAction("(+" + amount + " HP)" + "\n");
-        System.out.println("(+" + amount + " HP)");
+        Main.gui.newAction("Yummy (+" + amount + " HP)" + "\n");
     }
 
     void Rest(int amount) {
         this.currentEnergy += 10 * amount;
         if (this.currentEnergy > this.maxEnergy)
             this.currentEnergy = this.maxEnergy;
-        System.out.println("(+" + amount + " Energy)");
+        Main.gui.newAction("Rise and shine! " + "(+" + amount + " Energy)");
     }
 
     void StudyMath(Environment timer) {
@@ -49,7 +44,7 @@ public class Player {
         this.Math += 50;
         this.currentEnergy -= 10;
         this.currentHP -= 10;
-        System.out.println("Ooouf (+50 Math)");
+        Main.gui.newAction("Ooouf (+50 Math)");
     }
 
     boolean isDead() {
